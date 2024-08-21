@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Getter @Setter @AllArgsConstructor @ToString
 public class Expense {
     private String description;
-    private Double amount;
+    private double amount;
     private Categories category;
     private LocalDate date;
 }

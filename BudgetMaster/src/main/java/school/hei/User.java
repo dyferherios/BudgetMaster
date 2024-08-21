@@ -12,21 +12,24 @@ import java.util.stream.Collectors;
 @Getter @Setter @ToString
 public class User {
     private String name;
-    private Double BudgetPerMonth;
+    private double BudgetPerMonth;
     private List<Expense> expenseLists;
 
     public User(String name, Double budgetPerMonth, List<Expense> expenseLists) {
         this.name = name;
-        BudgetPerMonth = budgetPerMonth;
-        this.expenseLists = new ArrayList<>(expenseLists);
+        this.BudgetPerMonth = budgetPerMonth;
+        this.expenseLists = new ArrayList<>();
+        for (Expense expense : expenseLists) {
+            if (expense.getAmount() > 0.0) {
+                this.expenseLists.add(expense);
+            } else {
+                System.out.println("Expense with amount " + expense.getAmount() + " is not added because it is not positive.");
+            }
+        }
     }
 
     public void addExpense(Expense e){
-        if(e.getAmount()>=0.0){
-            expenseLists.add(e);
-        }else{
-            System.out.println("The expense don't be added, you chould make the amount to a positive value.");
-        }
+        expenseLists.add(e);
     }
 
     public List<Expense> getExpensesByCategory(Categories category){
